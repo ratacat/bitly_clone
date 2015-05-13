@@ -1,0 +1,46 @@
+body {
+	background-color:#eee;
+}
+
+#main {
+	width:400px;
+	height:200px;
+	margin:0 auto;
+	text-align:center;
+	margin-top:150px;
+	/*background-color:#111;*/
+}
+
+#main input {
+	width:320px;
+	display:block;
+	font-size:17px;
+	margin:0 auto;
+	border-radius:3px;
+	box-shadow:none;
+}
+
+#main button {
+	margin-top:20px;
+	font-size:17px;
+	border:none;
+	border-radius:1px;
+}
+
+input {
+  padding: 10px;
+  border: solid 1px #fff;
+  box-shadow: inset 1px 1px 2px 0 #707070;
+  transition: box-shadow 0.3s;
+}
+
+input:focus,
+input.focus {
+  box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+}
+
+
+.error {
+	display:block;
+	margin-top:15px;
+}
