@@ -1,8 +1,9 @@
 var express = require("express");
 var bodyparser = require("body-parser");
 var path = require("path");
+var RString = require("randomstring");
 var app = express();
-var redirects = [];
+var redirects = {};
 var $=require('jquery');
 
 app.use(bodyparser.urlencoded({extended: true}));
@@ -19,8 +20,8 @@ app.get("/",function(req,res) {
 	// }
 });
 
-app.get("/output",function(req,res) {
-	var reUrl = 'http://'+req.hostname+':3000'+'/redirect/'+[req.query.index];
+app.get("/output/:hash",function(req,res) {
+	var reUrl = 'http://'+req.hostname+':3000'+'/r/'+[req.params.hash];
 	//res.sendFile(path.join(viewsDir,"/output.html"));
 	res.render('output', {url: reUrl });
 });
@@ -30,15 +31,18 @@ app.get("/output",function(req,res) {
 // 	//console.log(req.query);
 // });
 
-app.get("/redirect/:index",function(req,res) {
-	console.log(redirects[req.params.index]);
-	res.redirect(redirects[req.params.index]);
+app.get("/r/:hash",function(req,res) {
+	console.log(redirects[req.params.hash]);
+	res.redirect(redirects[req.params.hash]);
 });
 
 app.post("/submit",function(req,res) {
 	//console.log(req.body.redirect.url);
-	var i = redirects.push(req.body.redirect.url) -1;
-	res.redirect("/output/?index="+i);
+	var hash = RString.generate();
+	redirects[hash] = req.body.redirect.url;
+	console.log(redirects);
+	// var i = redirects.push(req.body.redirect.url) -1;
+	res.redirect("/output/" + hash);
 });
 
 app.listen(3000);
