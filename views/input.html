@@ -7,10 +7,24 @@
         <title>input</title>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <link rel="stylesheet" href="style.css">
+        <script type="text/javascript">
+        $(document).ready(function() {
+        	$('input').focus();
+        })
+        	function isUrlValid(){
+				var inputUrl = $('#main input').val();
+				if (inputUrl === '') {
+					$('#main .error').text('Please enter a url!');
+					return false;
+				}
+			}
+        </script>
     </head>
     <body>
-    <h1>Enter a url to shorten</h1>
-    <form action="/submit" method="POST"><input type="text" name="redirect[url]" placeholder="insert here"><button>get short</button></form>
-        
+	    <div id="main">
+		    <h1>enter your url to shorten</h1>
+		    <form onsubmit="return isUrlValid()" action="/submit" method="POST"><input class="style-5" type="text" name="redirect[url]" placeholder="insert here"><button id="submit">shorten me</button></form>
+		    <span class="error"></span>
+	    </div>
     </body>
 </html>
