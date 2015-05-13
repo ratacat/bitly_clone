@@ -12,13 +12,14 @@ app.get("/",function(req,res) {
 });
 
 app.get("/yourlink", function(req,res) {
-	res.send("your link is: " + redirects[req.query.index]);
+	res.send("your link is: " +'http://'+req.hostname+':3000'+'/redirect/'+[req.query.index]);
 	//console.log(req.query);
 });
 
-app.get("/redirect/:index") {
+app.get("/redirect/:index",function(req,res) {
+	console.log(redirects[req.params.index]);
 	res.redirect(redirects[req.params.index]);
-}
+});
 
 app.post("/submit",function(req,res) {
 	//console.log(req.body.redirect.url);
