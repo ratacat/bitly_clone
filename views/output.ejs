@@ -9,21 +9,21 @@
         <link rel="stylesheet" href="/style.css">
         <script type="text/javascript">
         $(document).ready(function() {
-        	$('input').focus();
+        	$('input').select();
         });
-        	function isUrlValid(){
-				var inputUrl = $('#main input').val();
-				if (inputUrl === '') {
-					$('#main .error').text('Please enter a url!');
-					return false;
-				}
-			}
+   //      	function isUrlValid(){
+			// 	var inputUrl = $('#main input').val();
+			// 	if (inputUrl === '') {
+			// 		$('#main .error').text('Please enter a url!');
+			// 		return false;
+			// 	}
+			// }
         </script>
     </head>
     <body>
 	    <div id="main">
-		    <h1>enter your url to shorten</h1>
-		    <form onsubmit="return isUrlValid()" action="/submit" method="POST"><input class="style-5" type="text" name="redirect[url]" placeholder="insert here"><input id="out" type="text" name="redirect[out]" class="purgatory"><button id="submit">shorten me</button></form>
+		    <h1>here you go</h1>
+		    <form action="/" method="GET"><input value="<%= url %>" class="style-5" type="text"  placeholder="insert here"><button id="submit">go back</button></form>
 		    <span class="error"></span>
 	    </div>
 

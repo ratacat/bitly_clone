@@ -7,16 +7,28 @@ var $=require('jquery');
 
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(express.static('public'));
+app.set('view engine', 'ejs');  
 var viewsDir = path.join(process.cwd(),"views");
 
 app.get("/",function(req,res) {
 	res.sendFile(path.join(viewsDir,"/input.html"));
+	//console.log(req.query);
+	// if (req.query.index >= 0) {
+	// 	var reUrl = 'http://'+req.hostname+':3000'+'/redirect/'+[req.query.index];
+	// 	//$('#out').removeClass('purgatory').val(reUrl);
+	// }
 });
 
-app.get("/yourlink", function(req,res) {
-	res.send("your link is: " +'http://'+req.hostname+':3000'+'/redirect/'+[req.query.index]);
-	//console.log(req.query);
+app.get("/output",function(req,res) {
+	var reUrl = 'http://'+req.hostname+':3000'+'/redirect/'+[req.query.index];
+	//res.sendFile(path.join(viewsDir,"/output.html"));
+	res.render('output', {url: reUrl });
 });
+
+// app.get("/yourlink", function(req,res) {
+// 	res.send("your link is: " +'http://'+req.hostname+':3000'+'/redirect/'+[req.query.index]);
+// 	//console.log(req.query);
+// });
 
 app.get("/redirect/:index",function(req,res) {
 	console.log(redirects[req.params.index]);
@@ -26,7 +38,7 @@ app.get("/redirect/:index",function(req,res) {
 app.post("/submit",function(req,res) {
 	//console.log(req.body.redirect.url);
 	var i = redirects.push(req.body.redirect.url) -1;
-	res.redirect("/yourlink?index="+i);
+	res.redirect("/output/?index="+i);
 });
 
 app.listen(3000);

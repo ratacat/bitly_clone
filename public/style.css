@@ -39,6 +39,14 @@ input.focus {
   box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 }
 
+#main #out {
+	margin-top:20px;
+}
+
+#main .purgatory {
+	display:none;
+}
+
 
 .error {
 	display:block;
