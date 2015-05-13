@@ -3,8 +3,10 @@ var bodyparser = require("body-parser");
 var path = require("path");
 var app = express();
 var redirects = [];
+var $=require('jquery');
 
 app.use(bodyparser.urlencoded({extended: true}));
+app.use(express.static('public'));
 var viewsDir = path.join(process.cwd(),"views");
 
 app.get("/",function(req,res) {
@@ -28,6 +30,7 @@ app.post("/submit",function(req,res) {
 });
 
 app.listen(3000);
+
 
 //add data about redirector to array
 //process incoming requests as redirects
